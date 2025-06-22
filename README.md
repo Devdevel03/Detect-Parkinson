@@ -3,15 +3,6 @@
 <p align="center">
   An advanced, privacy-focused web application that predicts Parkinson's Disease from vocal measurements — with clear, jargon-free explanations from a local LLM. Built using React, FastAPI, XGBoost, SHAP, and Ollama.
 </p>
-
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Live Walkthrough</strong></a> ·
-  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
-  <a href="#installation"><strong>Installation</strong></a> ·
-  <a href="#how-it-works"><strong>How It Works</strong></a>
-</p>
-
 ---
 
 ## ✨ Features
