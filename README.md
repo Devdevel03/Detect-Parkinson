@@ -1,126 +1,97 @@
+<h1 align="center">🧠 Parkinson's Detection with AI Explainability</h1>
 
-## Setup and Installation
+<p align="center">
+  An advanced, privacy-focused web application that predicts Parkinson's Disease from vocal measurements — with clear, jargon-free explanations from a local LLM. Built using React, FastAPI, XGBoost, SHAP, and Ollama.
+</p>
 
-Follow these steps to set up and run the project on your local machine.
+<p align="center">
+  <img src="assets/prediction-ui.png" width="80%" alt="Prediction UI Screenshot">
+</p>
 
-### Prerequisites
+<p align="center">
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#demo"><strong>Live Walkthrough</strong></a> ·
+  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
+  <a href="#installation"><strong>Installation</strong></a> ·
+  <a href="#how-it-works"><strong>How It Works</strong></a>
+</p>
 
--   **Python**: Version 3.11 or newer.
--   **Node.js and npm**: Version 18.x or newer.
--   **Git**: For cloning the repository.
--   **Ollama**: Download and install from [ollama.com](https://ollama.com/).
+---
 
-### Backend Setup
+## ✨ Features
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/your-username/parkinsons-detection.git
-    cd parkinsons-detection
-    ```
+- ✅ **Accurate Prediction** — Uses a trained XGBoost model on 22 voice measurements to detect Parkinson’s.
+- 🧠 **Human-Friendly AI Explanation** — A local LLM explains *why* the model made its prediction using SHAP.
+- 🔒 **100% Privacy** — All inference and explanation run **entirely locally** using [Ollama](https://ollama.com).
+- 📊 **SHAP Visuals** — Visual feature impact using intuitive bar charts.
+- 🚀 **Modern Stack** — Built with React, FastAPI, Python, and TypeScript for maximum flexibility and performance.
+- 💬 **No API Keys Required** — Everything runs offline after model downloads. No subscriptions, no tracking.
 
-2.  **Navigate to the backend directory**:
-    ```bash
-    cd backend
-    ```
+---
 
-3.  **Create a virtual environment** (recommended):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+## 📸 Demo
 
-4.  **Install Python dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 🧪 1. Enter Patient Data
 
-5.  **Set up Ollama**:
-    -   Ensure the Ollama application is running.
-    -   Pull the `phi3:mini` model by running this command in your terminal:
-        ```bash
-        ollama pull phi3:mini
-        ```
+A clean, responsive form lets users input 22 vocal features or use a sample dataset.
 
-### Frontend Setup
+<p align="center">
+  <img src="assets/form-ui.png" width="80%" alt="Data Entry Form">
+</p>
 
-1.  **Navigate to the frontend directory** from the project root:
-    ```bash
-    cd ../frontend
-    ```
+### 🔍 2. Prediction & Explanation
 
-2.  **Install Node.js dependencies**:
-    ```bash
-    npm install
-    ```
+A fast XGBoost model returns the probability of Parkinson’s, along with:
+- A probability gauge
+- Color-coded SHAP feature chart
+- Plain English AI-generated explanation
 
-## How to Run
+<p align="center">
+  <img src="assets/prediction-ui.png" width="80%" alt="Prediction and SHAP Explanation">
+</p>
 
-You need to run three separate processes in three different terminals.
+---
 
-1.  **Terminal 1: Start the Ollama Server**
-    Run the language model. This will make the AI narrative generation available.
-    ```bash
-    ollama run phi3:mini
-    ```
-    Leave this terminal running.
+## ⚙️ Tech Stack
 
-2.  **Terminal 2: Start the FastAPI Backend Server**
-    From the project's **root directory** (`parkinsons-detection/`), run:
-    ```bash
-    uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
-    ```
-    The backend API will now be available at `http://localhost:8000`.
+| Layer        | Technology                                                                                       |
+|--------------|--------------------------------------------------------------------------------------------------|
+| **Frontend** | React, JavaScript, HTML5, CSS3                                                                   |
+| **Backend**  | FastAPI, Python 3.11+, Uvicorn, Pydantic                                                         |
+| **ML Model** | XGBoost for classification, MinMaxScaler preprocessing                                           |
+| **Explainability** | SHAP (SHapley Additive exPlanations)                                                       |
+| **AI Narrative** | Ollama + `phi3:mini` for local, LLM-based natural language summaries                         |
 
-3.  **Terminal 3: Start the React Frontend Server**
-    From the `frontend/` directory, run:
-    ```bash
-    npm start
-    ```
-    The application will automatically open in your browser at `http://localhost:3000`.
+---
 
-## How It Works
+## 🧭 Installation
 
-### Prediction Pipeline
+Follow these steps to run the project on your local machine.
 
-1.  The user fills out the form in the React frontend and clicks "Get Prediction".
-2.  The `api.js` module sends the form data as a JSON object to the FastAPI backend at the `/predict/` endpoint.
-3.  FastAPI uses Pydantic (`schema.py`) to validate the incoming data.
-4.  The `models.py` module preprocesses the data using a pre-trained `MinMaxScaler` and feeds it to the loaded XGBoost model.
-5.  The model returns a prediction (0 for Healthy, 1 for Parkinson's) and the class probabilities.
+### ✅ Prerequisites
 
-### Model Explainability
+- **Python** ≥ 3.11
+- **Node.js** ≥ 18.x
+- **Git**
+- **Ollama** — Download from [ollama.com](https://ollama.com)
 
-1.  After getting a prediction, the backend calls the `explainer.py` module.
-2.  **SHAP**: A `shap.Explainer` instance calculates the SHAP values for the given input, indicating the impact of each feature. Positive values push the prediction towards Parkinson's, and negative values push it towards Healthy.
-3.  **Ollama**: The top 4 most influential features (based on SHAP values) are formatted into a prompt. This prompt is sent to the locally running Ollama `phi3:mini` model.
-4.  **Response**: The LLM generates a simple, jargon-free explanation, which is sent back to the frontend along with the structured SHAP values and the prediction.
-5.  The React frontend displays the probability in the gauge, the narrative text, and the SHAP values in a color-coded bar chart.
+---
 
-## Screenshots
+## 🚀 Setup
 
-Here is a visual walkthrough of the application's user interface and features.
+### Backend (FastAPI)
 
+```bash
+# Clone the project
+git clone https://github.com/your-username/parkinsons-detection.git
+cd parkinsons-detection/backend
 
+# Create & activate a virtual environment
+python -m venv venv
+source venv/bin/activate     # Windows: venv\Scripts\activate
 
-### 1. Data Input Form
+# Install Python dependencies
+pip install -r requirements.txt
 
-This is the main interface where users can input the 22 voice measurement features. The form is pre-populated with sample data to facilitate quick testing and demonstrate the required data format.
-
-
-
-### 2. Prediction Results & AI Explanation
-
-Once the data is analyzed, the dashboard displays the results. This includes a probability gauge indicating the likelihood of Parkinson's and a simple, human-readable narrative generated by the AI assistant (Ollama and Phi-3). This provides an immediate, at-a-glance understanding of the outcome.
-
-
-#### Prediction Form
-
-*The interactive form where users can input patient voice data.*
-
-#### Results Display
-
-*The results section showing the probability gauge and the AI-generated narrative.*
-
-#### SHAP Feature Importance Chart
-
-*The SHAP bar chart visualizes the influence of each feature on the final prediction.*
+# Pull local model (run only once)
+ollama pull phi3:mini
