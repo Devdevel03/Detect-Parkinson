@@ -5,10 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="assets/prediction-ui.png" width="80%" alt="Prediction UI Screenshot">
-</p>
-
-<p align="center">
   <a href="#features"><strong>Features</strong></a> ·
   <a href="#demo"><strong>Live Walkthrough</strong></a> ·
   <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
@@ -36,7 +32,7 @@
 A clean, responsive form lets users input 22 vocal features or use a sample dataset.
 
 <p align="center">
-  <img src="assets/form-ui.png" width="80%" alt="Data Entry Form">
+  <img src="assets/form.png" width="80%" alt="Data Entry Form">
 </p>
 
 ### 🔍 2. Prediction & Explanation
@@ -47,7 +43,7 @@ A fast XGBoost model returns the probability of Parkinson’s, along with:
 - Plain English AI-generated explanation
 
 <p align="center">
-  <img src="assets/prediction-ui.png" width="80%" alt="Prediction and SHAP Explanation">
+  <img src="assets/results.png" width="80%" alt="Prediction and SHAP Explanation">
 </p>
 
 ---
